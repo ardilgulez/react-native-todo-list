@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useCallback, useState } from "react";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import DraggableFlatList, {
+    RenderItemParams,
+} from "react-native-draggable-flatlist";
+import ListItem from "./components/ListItem";
+
+import initialData from "./assets/fake-data";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    const [data, setData] = useState(initialData);
+
+    const renderItem = useCallback(
+        ({ item, index, drag, isActive }: RenderItemParams<Item>) => {
+            return (
+                <ListItem
+                    item={item}
+                    index={index}
+                    drag={drag}
+                    isActive={isActive}
+                />
+            );
+        },
+        []
+    );
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <DraggableFlatList
+                data={data}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id.toString()}
+                onDragEnd={({ data }) => setData(data)}
+            ></DraggableFlatList>
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: "#f1f1f1",
+        alignItems: "stretch",
+        justifyContent: "center",
+    },
 });
