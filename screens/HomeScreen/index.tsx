@@ -14,7 +14,7 @@ interface PropTypes {
 }
 
 const HomeScreen = ({ navigation }: PropTypes) => {
-    const [data, setData] = useState(initialData);
+    const [data, setData] = useState<Item[]>(initialData);
 
     const onClick = useCallback((item: Item) => {
         return () => {
