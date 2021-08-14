@@ -1,46 +1,17 @@
-import React, { useCallback, useState } from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import DraggableFlatList, {
-    RenderItemParams,
-} from "react-native-draggable-flatlist";
-import ListItem from "./components/ListItem";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import initialData from "./assets/fake-data";
+import HomeScreen from "./screens/HomeScreen";
 
-export default function App() {
-    const [data, setData] = useState(initialData);
+const Stack = createNativeStackNavigator();
 
-    const renderItem = useCallback(
-        ({ item, index, drag, isActive }: RenderItemParams<Item>) => {
-            return (
-                <ListItem
-                    item={item}
-                    index={index}
-                    drag={drag}
-                    isActive={isActive}
-                />
-            );
-        },
-        []
-    );
+const App = () => (
+    <NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+        </Stack.Navigator>
+    </NavigationContainer>
+);
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <DraggableFlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-                onDragEnd={({ data }) => setData(data)}
-            ></DraggableFlatList>
-        </SafeAreaView>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#f1f1f1",
-        alignItems: "stretch",
-        justifyContent: "center",
-    },
-});
+export default App;

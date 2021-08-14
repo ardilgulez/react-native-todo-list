@@ -2,13 +2,27 @@ import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { RenderItemParams } from "react-native-draggable-flatlist";
 
-const ListItem = ({ item, index, drag, isActive }: RenderItemParams<Item>) => {
+interface PropTypes<T> extends RenderItemParams<T> {
+    onClick: () => void;
+}
+
+const ListItem = ({
+    item,
+    index,
+    drag,
+    isActive,
+    onClick,
+}: PropTypes<Item>) => {
     const setSelection = (selected: boolean) => {
         console.log(selected);
     };
 
     return (
-        <TouchableOpacity style={styles.listItem} onLongPress={drag}>
+        <TouchableOpacity
+            style={styles.listItem}
+            onPress={() => onClick()}
+            onLongPress={drag}
+        >
             <Text style={item.done ? styles.doneText : styles.text}>
                 {item.name}
             </Text>

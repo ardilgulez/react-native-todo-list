@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.8",
+    "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native-stack": "^6.0.5",
     "@types/react-native-draggable-flatlist": "^2.0.0",
     "expo": "~42.0.1",
     "expo-sqlite": "~9.2.1",
@@ -19,6 +21,8 @@
     "react-native-draggable-flatlist": "^2.6.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.0",
+    "react-native-safe-area-context": "3.2.0",
+    "react-native-screens": "~3.4.0",
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-web": "~0.13.12"
   },
